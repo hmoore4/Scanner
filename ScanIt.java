@@ -24,20 +24,20 @@ import java.io.IOException;
     while((c = reader.read()) != -1){
     	StringBuilder builder = new StringBuilder();
     	char character = (char) c;
-    	char secondChar;
-    	if(character == '0' || character == '1' || character == '2' ||character == '3' ||character == '4' ||character == '5' ||character == '6' ||character == '7' ||character == '8' ||character == '9'){
+    	char secondChar;		
+    	if(Character.isDigit(character)){
     		builder.append(character);
     		d = reader.read();
     		secondChar = (char) d;
     		if(secondChar != '.'){
-    			System.out.println("integer '" + builder + "' found");
+    			System.out.println(": integer '" + builder + "' found");
     		}
     		
     		else if(secondChar == '.'){
     			builder.append(secondChar);
     			d = reader.read();
    				secondChar = (char) d;
-   				while(secondChar == '0' || secondChar== '1' || secondChar == '2' || secondChar == '3' || secondChar == '4' || secondChar == '5' || secondChar == '6' || secondChar == '7' || secondChar == 						'8'|| secondChar == '9'){ 
+   				while(secondChar == '0' || secondChar== '1' || secondChar == '2' || secondChar == '3' || secondChar == '4' || secondChar == '5' || secondChar == '6' || secondChar == '7' || secondChar == 						'8'|| secondChar == '9'){
 		 				builder.append(secondChar);
 		 				d = reader.read();
 	  				secondChar = (char) d; 
@@ -76,11 +76,46 @@ import java.io.IOException;
     			builder.append(secondChar);
 	    		d = reader.read();
   	  		secondChar = (char) d;
-  	  		if(secondChar == '"')
-  	  			System.out.print("DOI");
+  	  		if(secondChar == '"'){
+  	  		//Need to figure out how to include substrings in string... Has something to do with allow for \ and not having to check the next character
+  	  			  		/*if(secondChar == '\'){
+							builder.append(secondChar);
+	    				d = reader.read();
+							builder.append(secondChar);
+							d = reader.read();
+  	  				secondChar = (char) d;
+						}*/
+  	  		
+  	  		
+  	  		}
+
     		}
     	  System.out.println(": string '" + builder + "' found");
     	}
+    	
+    	if(Character.isLetter(character) || character == '_'){
+    			builder.append(character);
+    			d = reader.read();
+  	  		secondChar = (char) d;
+  	  		while(Character.isLetter(secondChar) || secondChar == '_' || secondChar == '0' || secondChar== '1' || secondChar == '2' || secondChar == '3' || secondChar == '4' || secondChar == '5' || 					secondChar == '6' || secondChar == '7' || secondChar == 				 '8'|| secondChar == '9'){
+  	  		builder.append(secondChar);
+  	  		d = reader.read();
+  	  		secondChar = (char) d;
+
+    			}	  
+    			//CLOSER EXCEPT OPERATOR AFTER PRINT ISN"T SHOWING
+    			 System.out.println(": identifier '" + builder + "' found"); 		
+    	}
+    	
+    	//UNKNOWN CHARACTER -- FIND UNICODE FOR IT IN CHAR API
+    	//else(
+    	//	System.out.print(": unknown character " + Character.);
+    	//)
+    	
+    	
+    	
+    	
+    	
     }
   
  /*  
