@@ -2,13 +2,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.*;
+import java.io.FileReader;
 import java.io.IOException;
-//import java.lang.StringBuilder;
-//import java.util.*; 
-
-
 
 /*
  * @author Hunter Moore
@@ -30,35 +25,63 @@ import java.io.IOException;
     	StringBuilder builder = new StringBuilder();
     	char character = (char) c;
     	char secondChar;
-    	//d = c.read();
-    	//if(c.equals(1) || c.equals(2) || c.equals(3) || c.equals(4)|| c.equals(5) || c.equals(6) || c.equals(7) || c.equals(8) || c.equals(9)){
     	if(character == '0' || character == '1' || character == '2' ||character == '3' ||character == '4' ||character == '5' ||character == '6' ||character == '7' ||character == '8' ||character == '9'){
     		builder.append(character);
-    		reader.skip(1);
-    		//MIGHT be on to something. If characater is an int, skip 
-    		//MAYBE get rid of this second while loop
-    		//while((c = reader.read()) != -1){
-    			if(character != '.'){
-    				System.out.println("integer '" + builder + "' found");
-    				//reader.read();
-    			}
+    		d = reader.read();
+    		secondChar = (char) d;
+    		if(secondChar != '.'){
+    			System.out.println("integer '" + builder + "' found");
+    		}
     		
-    			else if(character == '.'){
-    				builder.append(character);
-    				d = reader.read();
-    				System.out.println("float '" + builder + "' found");
-    			}
-    		//}
-  
+    		else if(secondChar == '.'){
+    			builder.append(secondChar);
+    			d = reader.read();
+   				secondChar = (char) d;
+   				while(secondChar == '0' || secondChar== '1' || secondChar == '2' || secondChar == '3' || secondChar == '4' || secondChar == '5' || secondChar == '6' || secondChar == '7' || secondChar == 						'8'|| secondChar == '9'){ 
+		 				builder.append(secondChar);
+		 				d = reader.read();
+	  				secondChar = (char) d; 
+   				}
+	  				System.out.println(": float '" + builder + "' found");    				
+    		}  
+    	}
+    	
+    	
+    	if(character == '.'){
+    	  builder.append(character);
+    		d = reader.read();
+    		secondChar = (char) d;
+    	   while(secondChar == '0' || secondChar== '1' || secondChar == '2' || secondChar == '3' || secondChar == '4' || secondChar == '5' || secondChar == '6' || secondChar == '7' || secondChar == 				 '8'|| secondChar == '9'){ 
+		  	 		builder.append(secondChar);
+		  			d = reader.read();
+		  			secondChar = (char) d; 
+
+    		 }
+    		 		if(builder.length() > 1)
+    			  	System.out.println(": float '" + builder + "' found"); 
+    			  else
+    			  	System.out.println(": operator '" + builder + "' found");
+    			   
     	}
     	
     	if(character == '+' || character == '-' ||character == '&' ||character == '/' ||character == '*' ||character == '(' ||character == ')' ||character == '[' ||character == ']'|| character == '=' ||character == '!' ||character == ':'|| character == '.' ||character == ',' ||character == '<'|| character == ';'){
     		System.out.println(": operator '" + character + "' found");
     		}
-    	if(character == 'p')
-    		System.out.print("HI");
+    		
+    	if(character == '"'){
 
-    //	System.out.println(character);
+    		d = reader.read();
+    		secondChar = (char) d;
+    		while(secondChar != '"'){
+    			builder.append(secondChar);
+	    		d = reader.read();
+  	  		secondChar = (char) d;
+  	  		if(secondChar == '"'){
+						if(character == '\')
+						
+    		}
+    	  System.out.println(": string '" + builder + "' found");
+    	}
     }
   
  /*  
@@ -91,16 +114,6 @@ import java.io.IOException;
  	}
  
 	 public static void main(String[] args)throws IOException, FileNotFoundException{
-		/*File f = new File("prog.x");
-    Scanner fileScanner = new Scanner(f);
-    int lineNumber = 0;
-    while(fileScanner.hasNextLine()){
-    	System.out.println(fileScanner.nextLine());
-    	System.out.println(lineNumber + ": ");
-    	lineNumber++;
-    }
-     fileScanner.close();
-     System.out.printf("%d lines\n", lineNumber);*/
 	 	ScanIt();
 	 }
  }
